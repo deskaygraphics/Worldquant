@@ -1,0 +1,10 @@
+names:
+- bicycle
+- bus
+- car
+- motorcycle
+- person
+nc: 5
+path: /app/data_yolo
+train: images/train
+val: images/val
