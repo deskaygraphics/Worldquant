@@ -37,6 +37,7 @@ from PIL import Image
 
 # Import our face recognition code
 from face_recognition import add_labels_to_image
+
 # Starts Flask
 app = Flask(__name__)
 
