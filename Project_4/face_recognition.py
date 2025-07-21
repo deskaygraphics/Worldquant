@@ -37,9 +37,10 @@ import matplotlib.pyplot as plt
 import torch
 from facenet_pytorch import MTCNN, InceptionResnetV1
 from PIL import Image
+
 # Load MTCNN, Resnet, and the embedding data
 
-mtcnn = MTCNN(image_size = 240, keep_all=True, min_face_size = 40)
+mtcnn = MTCNN(image_size=240, keep_all=True, min_face_size=40)
 resnet = InceptionResnetV1(pretrained="vggface2").eval()
 
 embedding_data = torch.load("embeddings.pt")
@@ -56,7 +57,6 @@ def locate_faces(image):
         return []
     else:
         return list(zip(boxes, probs, cropped_images))
-    
 
 
 # Fill in the determine_name_dist function
@@ -97,11 +97,7 @@ def label_face(name, dist, box, axis):
     # Add the code to generate a Rectangle for the bounding box
     # set the color to "blue" and fill to False
     rect = plt.Rectangle(
-        (box[0],box[1]),
-        box[2] - box[0],
-        box[3] - box[1],
-        fill = False,
-        color = "blue"
+        (box[0], box[1]), box[2] - box[0], box[3] - box[1], fill=False, color="blue"
     )
     axis.add_patch(rect)
 
@@ -111,10 +107,9 @@ def label_face(name, dist, box, axis):
         color = "red"
     else:
         color = "blue"
-    
+
     label = f"{name} {dist:.2f}"
     axis.text(box[0], box[1], label, fontsize="large", color=color)
-    
 
 
 # Fill in the add_labels_to_image function
@@ -136,7 +131,7 @@ def add_labels_to_image(image):
         # It's not a face, skip this run of the loop with continue
         if prob < 0.9:
             continue
-        
+
         # Call determine_name_dist to get the name and distance
         name, dist = determine_name_dist(cropped)
 
